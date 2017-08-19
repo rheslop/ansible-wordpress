@@ -19,9 +19,7 @@ GUEST_IMAGE=\
 
 ############ END VARIABLES ####################
 
-
 /usr/bin/qemu-img create -f qcow2 -b ${TEMPLATE} ${GUEST_IMAGE}
-
 
 cat > /tmp/ifcfg-eth0 << EOF
 DEVICE=eth0
@@ -42,12 +40,11 @@ virt-customize -a ${GUEST_IMAGE} \
 --copy-in /tmp/ifcfg-eth0:/etc/sysconfig/network-scripts/ \
 --ssh-inject root --selinux-relabel
 
-
 /usr/bin/virt-install \
 --disk path=${GUEST_IMAGE} \
---network network=default \
---name $VM_NAME \
+--network network=net-br0 \
+--name ${GUEST_NAME} \
 --ram 1024 \
 --import \
 --os-type=linux \
---os-variant=rhel7
+--os-variant=fedora23
