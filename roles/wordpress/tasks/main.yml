@@ -1,0 +1,24 @@
+- name: Installing needed packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - unzip
+    
+- name: Fetching and extracting wordpress
+  unarchive:
+    remote_src: yes
+    src: https://wordpress.org/latest.zip 
+    dest: /var/www/html
+
+- name: Copying configuration file
+  copy:
+    src: wp-config.php
+    dest: /var/www/html/wordpress/
+
+- name: Adjusting ownership
+  file:
+    path: /var/www/html
+    owner: apache
+    group: apache
+    recurse: true

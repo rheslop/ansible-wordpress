@@ -1,0 +1,15 @@
+- name: Installing Wordpress
+  hosts: 192.168.0.5
+  remote_user: root
+
+  pre_tasks:
+
+  - name: Setting hostname
+    hostname:
+      name: kwp.physnet.local
+
+  roles:
+    - mysql
+    - webserver
+    - php
+    - wordpress

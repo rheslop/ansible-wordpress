@@ -1,0 +1,25 @@
+- name: Installing packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - httpd
+    - firewalld
+    - python-firewall
+
+- name: Adjusting services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - httpd
+    - firewalld
+
+- name: Configuring firewalld
+  firewalld:
+    port: 80/tcp
+    state: enabled
+    permanent: true
+    immediate: true
+

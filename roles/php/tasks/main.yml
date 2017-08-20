@@ -1,0 +1,10 @@
+- name: Installing PHP
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - php
+    - php-mysqlnd
+    - php-pdo
+  notify:
+    - Restarting httpd
