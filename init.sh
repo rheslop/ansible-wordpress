@@ -12,7 +12,7 @@ fi
 GUEST_NAME=kwp-${RANDOM}
 
 TEMPLATE=\
-/var/lib/libvirt/images/vanilla-templates/Fedora-Cloud-Base-26-1.5.x86_64.qcow2
+/var/lib/libvirt/images/templates/Fedora-Cloud-Base-26-1.5.x86_64.qcow2
 
 GUEST_IMAGE=\
 /var/lib/libvirt/images/${GUEST_NAME}.qcow2
@@ -28,6 +28,7 @@ BOOTPROTO=none
 ONBOOT=yes
 IPADDR=192.168.0.5
 NETMASK=255.255.255.0
+GATEWAY=192.168.0.1
 DNS1=68.94.156.9
 DNS2=68.94.157.9
 EOF
